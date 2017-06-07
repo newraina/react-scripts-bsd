@@ -8,6 +8,11 @@
 
 # production
 /build
+/dist
+
+# IDE
+/.idea
+/.vscode
 
 # misc
 .DS_Store
