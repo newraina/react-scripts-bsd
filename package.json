@@ -18,7 +18,7 @@
     "utils"
   ],
   "bin": {
-    "react-scripts": "./bin/react-scripts.js"
+    "react-scripts-bsd": "./bin/react-scripts-bsd.js"
   },
   "dependencies": {
     "autoprefixer": "7.1.0",
