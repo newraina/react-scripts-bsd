@@ -3,7 +3,7 @@ import React from 'react'
 
 interface IModalConductorProps {}
 
-class ModalConductor extends React.Component<IModalConductorProps, {}> {
+class ModalConductor extends React.PureComponent<IModalConductorProps, {}> {
   
   render() {
     return (

@@ -5,7 +5,7 @@ import React from 'react'
 
 interface ILoginProps {}
 
-class Login extends React.Component<ILoginProps, {}> {
+class Login extends React.PureComponent<ILoginProps, {}> {
   
   render() {
     return (

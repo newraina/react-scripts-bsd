@@ -16,7 +16,7 @@ export interface IconPropType {
   onClick?: (e?: any) => void
 }
 
-export default class Icon extends React.Component<IconPropType, {}> {
+export default class Icon extends React.PureComponent<IconPropType, {}> {
   static defaultProps = {
     size: 16,
   }
