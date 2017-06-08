@@ -84,6 +84,9 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
+  
+        // 决定是用 ts 还是 js
+        REACT_APP_LANGUAGE_TYPE: 'ts',
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

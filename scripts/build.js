@@ -39,8 +39,11 @@ const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const useYarn = fs.existsSync(paths.yarnLockFile);
 
+// 根据 env.REACT_APP_LANGUAGE_TYPE 决定入口文件是 index.js 还是 index.tsx
+const appIndex = process.env.REACT_APP_LANGUAGE_TYPE === 'ts' ? paths.appIndexTs : paths.appIndexJs;
+
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.appHtml, appIndex])) {
   process.exit(1);
 }
 

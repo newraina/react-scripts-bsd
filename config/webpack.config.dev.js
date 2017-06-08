@@ -32,6 +32,9 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+// 根据 env.REACT_APP_LANGUAGE_TYPE 决定入口文件是 index.js 还是 index.tsx
+const appIndex = env.raw.REACT_APP_LANGUAGE_TYPE === 'ts' ? paths.appIndexTs : paths.appIndexJs;
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -59,7 +62,7 @@ module.exports = {
     // Errors should be considered fatal in development
     require.resolve('react-error-overlay'),
     // Finally, this is your app's code:
-    paths.appIndexJs,
+    appIndex,
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
@@ -94,7 +97,7 @@ module.exports = {
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
     alias: {
       // @remove-on-eject-begin
       // Resolve Babel runtime relative to react-scripts.
@@ -160,6 +163,8 @@ module.exports = {
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
+          /\.(ts|tsx)$/,
+          /\.less$/,
           /\.css$/,
           /\.json$/,
           /\.bmp$/,
@@ -199,6 +204,11 @@ module.exports = {
           cacheDirectory: true,
         },
       },
+      {
+        test: /\.(ts|tsx)$/,
+        include: paths.appSrc,
+        loader: require.resolve('awesome-typescript-loader'),
+      },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
       // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -212,6 +222,9 @@ module.exports = {
             loader: require.resolve('css-loader'),
             options: {
               importLoaders: 1,
+              camelCase: true,
+              modules: true,
+              minimize: true,
             },
           },
           {
@@ -227,13 +240,94 @@ module.exports = {
                     'Firefox ESR',
                     'not ie < 9', // React doesn't support IE8 anyway
                   ],
-                  flexbox: 'no-2009',
+                  flexbox: false,
                 }),
               ],
             },
           },
         ],
+        include: [paths.appSrc],
       },
+      {
+        test: /\.css$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+              minimize: true,
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                require('postcss-cssnext'),
+                // autoprefixer({
+                //   browsers: [
+                //     '>1%',
+                //     'last 4 versions',
+                //     'Firefox ESR',
+                //     'not ie < 9', // React doesn't support IE8 anyway
+                //   ],
+                //   flexbox: 'no-2009',
+                // }),
+              ],
+            },
+          },
+        ],
+        include: [paths.appNodeModules]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+              minimize: true,
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                require('postcss-cssnext'),
+                // autoprefixer({
+                //   browsers: [
+                //     '>1%',
+                //     'last 4 versions',
+                //     'Firefox ESR',
+                //     'not ie < 9', // React doesn't support IE8 anyway
+                //   ],
+                //   flexbox: 'no-2009',
+                // }),
+              ],
+            },
+          },
+          'less-loader'
+        ]
+      },
+      {
+        test: /\.(svg)$/i,
+        use: [{
+          loader: require.resolve('svg-sprite-loader'),
+          options: {
+            runtimeCompat: true
+          },
+        }, {
+          loader: 'svg-fill-loader'
+        }, {
+          loader: 'svgo-loader'
+        }],
+        include: [paths.appSrc]
+      }
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
     ],

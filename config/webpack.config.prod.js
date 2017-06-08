@@ -54,6 +54,9 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
     { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
 
+// 根据 env.REACT_APP_LANGUAGE_TYPE 决定入口文件是 index.js 还是 index.tsx
+const appIndex = env.raw.REACT_APP_LANGUAGE_TYPE === 'ts' ? paths.appIndexTs : paths.appIndexJs;
+
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -64,7 +67,7 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: [require.resolve('./polyfills'), appIndex],
   output: {
     // The build folder.
     path: paths.appBuild,
