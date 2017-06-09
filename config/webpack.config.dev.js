@@ -207,7 +207,12 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
-        loader: require.resolve('awesome-typescript-loader'),
+        use: [{
+          loader: require.resolve('awesome-typescript-loader'),
+          options: {
+            configFileName: paths.appTsConfigJson
+          }
+        }],
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
