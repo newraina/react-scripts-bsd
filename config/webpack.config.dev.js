@@ -230,6 +230,7 @@ module.exports = {
               camelCase: true,
               modules: true,
               minimize: true,
+              localIdentName: '[folder]-[local]-[hash:base64:5]'
             },
           },
           {
