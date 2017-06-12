@@ -1,5 +1,7 @@
 # react-scripts-bsd
 
+[![npm version](https://badge.fury.io/js/react-scripts-bsd.svg)](https://badge.fury.io/js/react-scripts-bsd)
+
 Base on react-scripts@1.0.7
 
 This package includes scripts and configuration used by [Create React App](https://github.com/facebookincubator/create-react-app).<br>
