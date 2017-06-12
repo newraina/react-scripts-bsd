@@ -396,9 +396,9 @@ module.exports = {
     new webpack.DefinePlugin(env.stringified),
     // Minify the code.
     // UglifyJs 不能压缩 ES6+ 代码
-    // new BabiliPlugin({}, {
-    //   comments: false,
-    // }),
+    new BabiliPlugin({}, {
+      comments: false,
+    }),
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
     //     warnings: false,
