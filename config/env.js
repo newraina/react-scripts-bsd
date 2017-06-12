@@ -84,8 +84,9 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
-  
+
         // 决定是用 ts 还是 js
+        // TODO 让 process.env.REACT_APP_LANGUAGE_TYPE 默认值为 ts
         REACT_APP_LANGUAGE_TYPE: 'ts',
       }
     );
