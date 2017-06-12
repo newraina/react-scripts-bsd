@@ -35,6 +35,13 @@ const env = getClientEnvironment(publicUrl);
 // 根据 env.REACT_APP_LANGUAGE_TYPE 决定入口文件是 index.js 还是 index.tsx
 const appIndex = env.raw.REACT_APP_LANGUAGE_TYPE === 'ts' ? paths.appIndexTs : paths.appIndexJs;
 
+// 用于 postcss-cssnext 和 babel-preset-env 的 targets.browsers 配置
+const browserTargets = require(paths.appPackageJson).browsers || [
+  '>1%',
+  'last 4 versions',
+  'Firefox ESR',
+  'not ie < 9', // React doesn't support IE8 anyway
+];
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -139,7 +146,9 @@ module.exports = {
               formatter: eslintFormatter,
               // @remove-on-eject-begin
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
+                // eslint-config-bx-bsd 替代 eslint-config-react-app
+                extends: [require.resolve('eslint-config-bx-bsd')],
+                // extends: [require.resolve('eslint-config-react-app')],
               },
               ignore: false,
               useEslintrc: false,
@@ -196,7 +205,13 @@ module.exports = {
         options: {
           // @remove-on-eject-begin
           babelrc: false,
-          presets: [require.resolve('babel-preset-react-app')],
+          // 用 babel-preset-env 代替 babel-preset-react-app
+          presets: [[require.resolve('babel-preset-env'), {
+            "targets": {
+              "browsers": browserTargets
+            }
+          }]],
+          // presets: [require.resolve('babel-preset-react-app')],
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -239,13 +254,8 @@ module.exports = {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
               plugins: () => [
                 require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
+                require('postcss-cssnext')({
+                  browsers: browserTargets,
                   flexbox: false,
                 }),
               ],
@@ -271,16 +281,10 @@ module.exports = {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
               plugins: () => [
                 require('postcss-flexbugs-fixes'),
-                require('postcss-cssnext'),
-                // autoprefixer({
-                //   browsers: [
-                //     '>1%',
-                //     'last 4 versions',
-                //     'Firefox ESR',
-                //     'not ie < 9', // React doesn't support IE8 anyway
-                //   ],
-                //   flexbox: 'no-2009',
-                // }),
+                require('postcss-cssnext')({
+                  browsers: browserTargets,
+                  flexbox: false,
+                }),
               ],
             },
           },
@@ -304,20 +308,14 @@ module.exports = {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
               plugins: () => [
                 require('postcss-flexbugs-fixes'),
-                require('postcss-cssnext'),
-                // autoprefixer({
-                //   browsers: [
-                //     '>1%',
-                //     'last 4 versions',
-                //     'Firefox ESR',
-                //     'not ie < 9', // React doesn't support IE8 anyway
-                //   ],
-                //   flexbox: 'no-2009',
-                // }),
+                require('postcss-cssnext')({
+                  browsers: browserTargets,
+                  flexbox: false,
+                }),
               ],
             },
           },
-          'less-loader'
+          require.resolve('less-loader')
         ]
       },
       {

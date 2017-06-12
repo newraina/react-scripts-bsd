@@ -15,6 +15,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BabiliPlugin = require("babili-webpack-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -57,6 +58,14 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 // 根据 env.REACT_APP_LANGUAGE_TYPE 决定入口文件是 index.js 还是 index.tsx
 const appIndex = env.raw.REACT_APP_LANGUAGE_TYPE === 'ts' ? paths.appIndexTs : paths.appIndexJs;
 
+// 用于 postcss-cssnext 和 babel-preset-env 的 targets.browsers 配置
+const browserTargets = require(paths.appPackageJson).browsers || [
+  '>1%',
+  'last 4 versions',
+  'Firefox ESR',
+  'not ie < 9', // React doesn't support IE8 anyway
+];
+
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -95,7 +104,7 @@ module.exports = {
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
     alias: {
       // @remove-on-eject-begin
       // Resolve Babel runtime relative to react-scripts.
@@ -139,7 +148,9 @@ module.exports = {
               // TODO: consider separate config for production,
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
+                // eslint-config-bx-bsd 替代 eslint-config-react-app
+                extends: [require.resolve('eslint-config-bx-bsd')],
+                // extends: [require.resolve('eslint-config-react-app')],
               },
               ignore: false,
               useEslintrc: false,
@@ -162,6 +173,8 @@ module.exports = {
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
+          /\.(ts|tsx)$/,
+          /\.less$/,
           /\.css$/,
           /\.json$/,
           /\.bmp$/,
@@ -192,9 +205,25 @@ module.exports = {
         // @remove-on-eject-begin
         options: {
           babelrc: false,
-          presets: [require.resolve('babel-preset-react-app')],
+          // 用 babel-preset-env 代替 babel-preset-react-app
+          presets: [[require.resolve('babel-preset-env'), {
+            "targets": {
+              "browsers": browserTargets
+            }
+          }]],
+          // presets: [require.resolve('babel-preset-react-app')],
         },
         // @remove-on-eject-end
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        include: paths.appSrc,
+        use: [{
+          loader: require.resolve('awesome-typescript-loader'),
+          options: {
+            configFileName: paths.appTsConfigJson
+          }
+        }],
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -219,8 +248,10 @@ module.exports = {
                   loader: require.resolve('css-loader'),
                   options: {
                     importLoaders: 1,
+                    camelCase: true,
+                    modules: true,
                     minimize: true,
-                    sourceMap: true,
+                    localIdentName: '[folder]-[local]-[hash:base64:5]'
                   },
                 },
                 {
@@ -229,18 +260,85 @@ module.exports = {
                     ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
                     plugins: () => [
                       require('postcss-flexbugs-fixes'),
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                        flexbox: 'no-2009',
+                      require('postcss-cssnext')({
+                        browsers: browserTargets,
+                        flexbox: false,
                       }),
                     ],
                   },
                 },
+              ],
+            },
+            extractTextPluginOptions
+          )
+        ),
+        include: [paths.appSrc]
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: true,
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: {
+                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                    plugins: () => [
+                      require('postcss-flexbugs-fixes'),
+                      require('postcss-cssnext')({
+                        browsers: browserTargets,
+                        flexbox: false,
+                      }),
+                    ],
+                  },
+                },
+              ],
+            },
+            extractTextPluginOptions
+          )
+        ),
+        include: [paths.appNodeModules]
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      // 默认支持 less, 因为常用 ant.design, 支持 less 可以更好的定制 antd 的主题
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: true,
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: {
+                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                    plugins: () => [
+                      require('postcss-flexbugs-fixes'),
+                      require('postcss-cssnext')({
+                        browsers: browserTargets,
+                        flexbox: false,
+                      }),
+                    ],
+                  },
+                },
+                require.resolve('less-loader')
               ],
             },
             extractTextPluginOptions
@@ -282,20 +380,24 @@ module.exports = {
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
     // Minify the code.
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        // Disabled because of an issue with Uglify breaking seemingly valid code:
-        // https://github.com/facebookincubator/create-react-app/issues/2376
-        // Pending further investigation:
-        // https://github.com/mishoo/UglifyJS2/issues/2011
-        comparisons: false,
-      },
-      output: {
-        comments: false,
-      },
-      sourceMap: true,
+    // UglifyJs 不能压缩 ES6+ 代码
+    new BabiliPlugin({
+      comments: false,
     }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //     // Disabled because of an issue with Uglify breaking seemingly valid code:
+    //     // https://github.com/facebookincubator/create-react-app/issues/2376
+    //     // Pending further investigation:
+    //     // https://github.com/mishoo/UglifyJS2/issues/2011
+    //     comparisons: false,
+    //   },
+    //   output: {
+    //     comments: false,
+    //   },
+    //   sourceMap: true,
+    // }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
       filename: cssFilename,
