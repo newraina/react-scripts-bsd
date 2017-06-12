@@ -18,8 +18,12 @@ module.exports = async (dir) => {
   })
   
   return await Promise.all(files.map(file => {
-      const dest = prefix + file.name
-      return upyunClient.putFile(file.path, dest)
+    // 上传时排除 map 文件
+    if (file.name.endsWith('.map')) {
+      return
+    }
+    const dest = prefix + file.name
+    return upyunClient.putFile(file.path, dest)
     })
   )
 }
