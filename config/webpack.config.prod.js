@@ -347,6 +347,20 @@ module.exports = {
         ),
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
+      {
+        test: /\.(svg)$/i,
+        use: [{
+          loader: require.resolve('svg-sprite-loader'),
+          options: {
+            runtimeCompat: true
+          },
+        }, {
+          loader: 'svg-fill-loader'
+        }, {
+          loader: 'svgo-loader'
+        }],
+        include: [paths.appSrc]
+      },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
     ],
@@ -382,7 +396,7 @@ module.exports = {
     new webpack.DefinePlugin(env.stringified),
     // Minify the code.
     // UglifyJs 不能压缩 ES6+ 代码
-    new BabiliPlugin({
+    new BabiliPlugin({}, {
       comments: false,
     }),
     // new webpack.optimize.UglifyJsPlugin({
