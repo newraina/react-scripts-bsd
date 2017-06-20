@@ -58,6 +58,7 @@
     "promise": "7.1.1",
     "react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
+    "react-hot-loader": "3.0.0-beta.7",
     "style-loader": "0.17.0",
     "svg-sprite-loader": "0.3.1",
     "svgo-loader": "^1.2.1",

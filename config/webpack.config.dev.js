@@ -61,6 +61,7 @@ module.exports = {
     // Note: instead of the default WebpackDevServer client, we use a custom one
     // to bring better experience for Create React App users. You can replace
     // the line below with these two lines if you prefer the stock client:
+    require.resolve('react-hot-loader/patch'),
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
     require.resolve('react-dev-utils/webpackHotDevClient'),
@@ -223,7 +224,8 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
-        use: [{
+        use: [
+          require.resolve('react-hot-loader/webpack'), {
           loader: require.resolve('awesome-typescript-loader'),
           options: {
             configFileName: paths.appTsConfigJson
