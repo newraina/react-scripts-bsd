@@ -30,11 +30,14 @@ function cutBuildedHtmlFile() {
 }
 
 function getProjectName() {
+  if (process.env.VIEW_NAME) {
+    return process.env.VIEW_NAME
+  }
   const packageName = require(paths.appPackageJson).name
   if (packageName && packageName !== 'fe') {
     return packageName + '.html'
   }
-  
+
   return 'index.html'
 }
 
@@ -44,12 +47,12 @@ function getViewDir() {
 
 async function release() {
   console.log('Release start...\n')
-  
+
   console.log('copy html to view dir...\n')
   cutBuildedHtmlFile()
-  
+
   console.log('deploy build dir to upyun...\n')
   await upload(paths.appBuild)
-  
+
   console.log('Release success!')
 }
