@@ -60,13 +60,14 @@
     "react-error-overlay": "^1.0.7",
     "react-hot-loader": "3.0.0-beta.7",
     "style-loader": "0.17.0",
+    "svg-fill-loader": "0.0.8",
     "svg-sprite-loader": "0.3.1",
     "svgo-loader": "^1.2.1",
     "sw-precache-webpack-plugin": "0.9.1",
     "tslint": "^5.4.3",
     "tslint-loader": "^3.5.3",
     "tslint-react": "^3.0.0",
-    "typescript": "^2.3.4",
+    "typescript": "2.4.1",
     "upyun.io": "^1.0.0",
     "url-loader": "0.5.8",
     "webpack": "2.6.1",
@@ -75,19 +76,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.0",
-    "@types/fetch.io": "^3.1.4",
     "@types/jest": "^19.2.4",
-    "@types/node": "^7.0.28",
-    "@types/nprogress": "^0.0.29",
-    "@types/react": "^15.0.27",
-    "@types/react-dom": "^15.5.0",
-    "classnames": "^2.2.5",
-    "fetch.io": "^4.0.0",
-    "nprogress": "^0.2.0",
-    "object-keys-mapping": "^2.0.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "@types/node": "^7.0.28"
   },
   "optionalDependencies": {
     "fsevents": "1.0.17"

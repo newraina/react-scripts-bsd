@@ -9,14 +9,6 @@
     address "^1.0.1"
     debug "^2.6.0"
 
-"@types/classnames@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/@types/classnames/-/classnames-2.2.0.tgz#f2312039e780bdf89d7d4102a26ec11de5ec58aa"
-
-"@types/fetch.io@^3.1.4":
-  version "3.1.4"
-  resolved "https://registry.npmjs.org/@types/fetch.io/-/fetch.io-3.1.4.tgz#0c389d6f96883e85226b4a18f1c11a9c21519dc4"
-
 "@types/jest@^19.2.4":
   version "19.2.4"
   resolved "https://registry.npmjs.org/@types/jest/-/jest-19.2.4.tgz#543651712535962b7dc615e18e4a381fc2687442"
@@ -24,20 +16,6 @@
 "@types/node@^7.0.28":
   version "7.0.28"
   resolved "https://registry.npmjs.org/@types/node/-/node-7.0.28.tgz#3a8c62b718a73bbb89ede4aba5ab12c8f822c36e"
-
-"@types/nprogress@^0.0.29":
-  version "0.0.29"
-  resolved "https://registry.npmjs.org/@types/nprogress/-/nprogress-0.0.29.tgz#060bd510022a005f1840234030d3132fb9195471"
-
-"@types/react-dom@^15.5.0":
-  version "15.5.0"
-  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-15.5.0.tgz#7f4fb9613d4051141773242f7b6b5f1a46b34bd9"
-  dependencies:
-    "@types/react" "*"
-
-"@types/react@*", "@types/react@^15.0.27":
-  version "15.0.27"
-  resolved "https://registry.npmjs.org/@types/react/-/react-15.0.27.tgz#d64ad424aa24a101fd50cdeae6eab3d53e65513d"
 
 abab@^1.0.3:
   version "1.0.3"
@@ -1552,10 +1530,6 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-classnames@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.npmjs.org/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-
 clean-css@4.1.x:
   version "4.1.3"
   resolved "http://registry.npm.taobao.org/clean-css/download/clean-css-4.1.3.tgz#07cfe8980edb20d455ddc23aadcf1e04c6e509ce"
@@ -2697,13 +2671,6 @@ fbjs@^0.8.9:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-fetch.io@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/fetch.io/-/fetch.io-4.0.0.tgz#46eb5d6078d439b97368c1327d5143a3d504b7e1"
-  dependencies:
-    form-data "^2.1.2"
-    node-fetch "^1.6.3"
-
 figures@^1.3.5:
   version "1.7.0"
   resolved "http://registry.npm.taobao.org/figures/download/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
@@ -2823,7 +2790,7 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "http://registry.npm.taobao.org/forever-agent/download/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
-form-data@^2.1.2, form-data@~2.1.1:
+form-data@~2.1.1:
   version "2.1.4"
   resolved "http://registry.npm.taobao.org/form-data/download/form-data-2.1.4.tgz#33c183acf193276ecaa98143a69e94bfee1750d1"
   dependencies:
@@ -3170,7 +3137,7 @@ html-webpack-plugin@2.28.0:
     pretty-error "^2.0.2"
     toposort "^1.0.0"
 
-htmlparser2@^3.9.1:
+htmlparser2@^3.8.3, htmlparser2@^3.9.1:
   version "3.9.2"
   resolved "https://registry.npmjs.org/htmlparser2/-/htmlparser2-3.9.2.tgz#1bdf87acca0f3f9e53fa4fcceb0f4b4cbb00b338"
   dependencies:
@@ -3571,7 +3538,7 @@ isnumeric@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/isnumeric/-/isnumeric-0.2.0.tgz#a2347ba360de19e33d0ffd590fddf7755cbf2e64"
 
-isobject@^2.0.0:
+isobject@^2.0.0, isobject@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/isobject/download/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
   dependencies:
@@ -4070,7 +4037,7 @@ loader-runner@^2.3.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/loader-runner/download/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
-loader-utils@^0.2.11, loader-utils@^0.2.16:
+loader-utils@^0.2.11, loader-utils@^0.2.15, loader-utils@^0.2.16:
   version "0.2.17"
   resolved "http://registry.npm.taobao.org/loader-utils/download/loader-utils-0.2.17.tgz#f86e6374d43205a6e6c60e9196f17c0299bfb348"
   dependencies:
@@ -4106,7 +4073,7 @@ lodash.bind@^4.1.4:
   version "4.2.1"
   resolved "https://registry.npmjs.org/lodash.bind/-/lodash.bind-4.2.1.tgz#7ae3017e939622ac31b7d7d7dcb1b34db1690d35"
 
-lodash.camelcase@^4.1.1, lodash.camelcase@^4.3.0:
+lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "http://registry.npm.taobao.org/lodash.camelcase/download/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
@@ -4187,7 +4154,7 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/longest/download/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "http://registry.npm.taobao.org/loose-envify/download/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   dependencies:
@@ -4413,7 +4380,7 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-node-fetch@^1.0.1, node-fetch@^1.6.3:
+node-fetch@^1.0.1:
   version "1.6.3"
   resolved "http://registry.npm.taobao.org/node-fetch/download/node-fetch-1.6.3.tgz#dc234edd6489982d58e8f0db4f695029abcd8c04"
   dependencies:
@@ -4523,10 +4490,6 @@ npmlog@^4.0.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
-nprogress@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
-
 nth-check@~1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/nth-check/download/nth-check-1.0.1.tgz#9929acdf628fc2c41098deab82ac580cf149aae4"
@@ -4556,12 +4519,6 @@ object-assign@4.1.1, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^
 object-hash@^1.1.4:
   version "1.1.8"
   resolved "http://registry.npm.taobao.org/object-hash/download/object-hash-1.1.8.tgz#28a659cf987d96a4dabe7860289f3b5326c4a03c"
-
-object-keys-mapping@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/object-keys-mapping/-/object-keys-mapping-2.0.0.tgz#317ddafb10181b28cac278c014fbf84c09f7c062"
-  dependencies:
-    lodash.camelcase "^4.1.1"
 
 object-keys@^1.0.10, object-keys@^1.0.8:
   version "1.0.11"
@@ -5072,6 +5029,12 @@ postcss-font-variant@^2.0.0:
   dependencies:
     postcss "^5.0.4"
 
+postcss-helpers@^0.3.1:
+  version "0.3.1"
+  resolved "http://registry.npm.taobao.org/postcss-helpers/download/postcss-helpers-0.3.1.tgz#386d22b4ccbf08957c372715f645fecf3b9bf113"
+  dependencies:
+    urijs "1.17"
+
 postcss-image-set-polyfill@^0.3.3:
   version "0.3.4"
   resolved "https://registry.npmjs.org/postcss-image-set-polyfill/-/postcss-image-set-polyfill-0.3.4.tgz#46e08405098574eb5090c6af98c4bc99d73f5326"
@@ -5343,7 +5306,7 @@ postcss-zindex@^2.0.1:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
-postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.2, postcss@^5.0.21, postcss@^5.0.3, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.1.1, postcss@^5.2.0, postcss@^5.2.10, postcss@^5.2.12, postcss@^5.2.16:
+postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.2, postcss@^5.0.21, postcss@^5.0.3, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.1.0, postcss@^5.1.1, postcss@^5.2.0, postcss@^5.2.10, postcss@^5.2.12, postcss@^5.2.16:
   version "5.2.17"
   resolved "http://registry.npm.taobao.org/postcss/download/postcss-5.2.17.tgz#cf4f597b864d65c8a492b2eabe9d706c879c388b"
   dependencies:
@@ -5359,6 +5322,24 @@ postcss@^6.0.1, postcss@^6.x:
     chalk "^1.1.3"
     source-map "^0.5.6"
     supports-color "^3.2.3"
+
+posthtml-parser@^0.2.0:
+  version "0.2.1"
+  resolved "http://registry.npm.taobao.org/posthtml-parser/download/posthtml-parser-0.2.1.tgz#35d530de386740c2ba24ff2eb2faf39ccdf271dd"
+  dependencies:
+    htmlparser2 "^3.8.3"
+    isobject "^2.1.0"
+
+posthtml-render@^1.0.5, posthtml-render@^1.0.6:
+  version "1.0.6"
+  resolved "http://registry.npm.taobao.org/posthtml-render/download/posthtml-render-1.0.6.tgz#1b88b8e7860a8ebdfe2f2a1310a4642a55cf5bda"
+
+posthtml@^0.9.0:
+  version "0.9.2"
+  resolved "http://registry.npm.taobao.org/posthtml/download/posthtml-0.9.2.tgz#f4c06db9f67b61fd17c4e256e7e3d9515bf726fd"
+  dependencies:
+    posthtml-parser "^0.2.0"
+    posthtml-render "^1.0.5"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -5416,7 +5397,7 @@ promise@7.1.1, promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.5.7, prop-types@~15.5.7:
+prop-types@^15.5.4:
   version "15.5.10"
   resolved "http://registry.npm.taobao.org/prop-types/download/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -5545,15 +5526,6 @@ react-dev-utils@^3.0.0:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@^15.5.4:
-  version "15.5.4"
-  resolved "http://registry.npm.taobao.org/react-dom/download/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "~15.5.7"
-
 react-error-overlay@^1.0.7:
   version "1.0.7"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-1.0.7.tgz#8712fe40cfc194ce992a4136c091c03bfada9148"
@@ -5581,15 +5553,6 @@ react-proxy@^3.0.0-alpha.0:
   resolved "https://registry.npmjs.org/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
   dependencies:
     lodash "^4.6.1"
-
-react@^15.5.4:
-  version "15.5.4"
-  resolved "http://registry.npm.taobao.org/react/download/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.7"
 
 read-all-stream@^3.0.0:
   version "3.1.0"
@@ -6302,6 +6265,18 @@ supports-color@^3.1.0, supports-color@^3.1.1, supports-color@^3.1.2, supports-co
   dependencies:
     has-flag "^1.0.0"
 
+svg-fill-loader@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/svg-fill-loader/-/svg-fill-loader-0.0.8.tgz#db11128558426577fdac3f2c38d7a5886014cd22"
+  dependencies:
+    loader-utils "^0.2.15"
+    object-assign "^4.1.0"
+    postcss "^5.1.0"
+    postcss-helpers "^0.3.1"
+    posthtml "^0.9.0"
+    posthtml-parser "^0.2.0"
+    posthtml-render "^1.0.6"
+
 svg-sprite-loader@0.3.1:
   version "0.3.1"
   resolved "https://registry.npmjs.org/svg-sprite-loader/-/svg-sprite-loader-0.3.1.tgz#44b22c7724bc77256c306b1796257ae6efee515a"
@@ -6566,9 +6541,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "http://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.3.4:
-  version "2.3.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-2.3.4.tgz#3d38321828231e434f287514959c37a82b629f42"
+typescript@2.4.1:
+  version "2.4.1"
+  resolved "http://registry.npm.taobao.org/typescript/download/typescript-2.4.1.tgz#c3ccb16ddaa0b2314de031e7e6fee89e5ba346bc"
 
 ua-parser-js@^0.7.9:
   version "0.7.12"
@@ -6657,9 +6632,9 @@ upyun.io@^1.0.0:
     mz "2"
     tiny-request "2"
 
-urijs@^1.16.1:
-  version "1.18.10"
-  resolved "http://registry.npm.taobao.org/urijs/download/urijs-1.18.10.tgz#b94463eaba59a1a796036a467bb633c667f221ab"
+urijs@1.17, urijs@^1.16.1:
+  version "1.17.1"
+  resolved "http://registry.npm.taobao.org/urijs/download/urijs-1.17.1.tgz#0a28bf2e00dfc24eeb0974feb8268a238c7bac2d"
 
 url-loader@0.5.8:
   version "0.5.8"
