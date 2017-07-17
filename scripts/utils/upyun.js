@@ -5,7 +5,12 @@ const upyun = require('upyun.io');
 const path = require('path');
 const paths = require('../../config/paths');
 
-const upyunConfig = require(paths.appUpyunConfig)
+const upyunConfig = require(paths.appPackageJson).upyun
+
+if (!upyun) {
+  throw new Error('upyun config not found in package.json file')
+}
+
 const upyunClient = upyun(upyunConfig)
 
 module.exports = async (dir) => {
@@ -16,7 +21,7 @@ module.exports = async (dir) => {
       path: path.resolve(dir, p)
     }
   })
-  
+
   return await Promise.all(files.map(file => {
     // 上传时排除 map 文件
     if (file.name.endsWith('.map')) {
