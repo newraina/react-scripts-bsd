@@ -252,7 +252,7 @@ module.exports = {
                     camelCase: true,
                     modules: true,
                     minimize: true,
-                    localIdentName: '[folder]-[local]-[hash:base64:5]'
+                    localIdentName: '[folder]-[name]-[local]-[hash:base64:5]'
                   },
                 },
                 {
@@ -355,9 +355,9 @@ module.exports = {
             runtimeCompat: true
           },
         }, {
-          loader: 'svg-fill-loader'
+          loader: require.resolve('svg-fill-loader')
         }, {
-          loader: 'svgo-loader'
+          loader: require.resolve('svgo-loader')
         }],
         include: [paths.appSrc]
       },

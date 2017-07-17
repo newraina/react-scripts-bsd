@@ -68,7 +68,7 @@ module.exports = {
     // We ship a few polyfills by default:
     require.resolve('./polyfills'),
     // Errors should be considered fatal in development
-    require.resolve('react-error-overlay'),
+    // require.resolve('react-error-overlay'),
     // Finally, this is your app's code:
     appIndex,
     // We include the app code last so that if there is a runtime error during
@@ -248,7 +248,7 @@ module.exports = {
               camelCase: true,
               modules: true,
               minimize: true,
-              localIdentName: '[folder]-[local]-[hash:base64:5]'
+              localIdentName: '[folder]-[name]-[local]-[hash:base64:5]'
             },
           },
           {
@@ -329,9 +329,9 @@ module.exports = {
             runtimeCompat: true
           },
         }, {
-          loader: 'svg-fill-loader'
+          loader: require.resolve('svg-fill-loader')
         }, {
-          loader: 'svgo-loader'
+          loader: require.resolve('svgo-loader')
         }],
         include: [paths.appSrc]
       }
